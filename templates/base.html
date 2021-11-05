@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset="utf-8">
+        <meta name = "viewport" content = "width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="{{ url_for('static', filename= 'css/bootstrap.min.css') }}">
+        <title>Choose your designed restaurants in New York</title>
+    </head>
+
+    <body>
+        <a class = "navbar-brad" href = "{{ url_for('index') }}">Back to Selections</a>
+        <div class = "container">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <script src="{{url_for('static', filename='js/jquery.slim.min.js')}}" ></script>
+        <script src="{{url_for('static', filename='js/popper.min.js')}}" ></script>
+        <script src="{{url_for('static', filename='js/bootstrap.min.js')}}" ></script>
+    </body>
+</html>
