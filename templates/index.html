@@ -1,0 +1,44 @@
+{% expands 'base.html' %}
+
+{% block content %}
+
+<form method = "post">
+    <div class = "form-group">
+        <label for = "Areas">Choose an area:</label>
+        <select name = "Area_choices" id = "Areas">
+            {% for area in area_selection %}
+            <option value="area['aid']">{{ area['area_name'] }}</option>
+        </select>
+    </div>
+
+
+    <div class = "form-group">
+        <label for = "Cuisine">Choose a cusine type:</label>
+        <select name = "Cuisine_chocies" id = "Cuisines">
+            {% for cuisine in cuisine_selection %}
+            <option value ="cuisine['cid']"> {{ cuisine['cuisine_name'] }} </option>
+        </select>
+    </div>
+
+    <div class = "form-group">
+        <label for = "Dine-Type">Choose the period of time:</label>
+        <select name = "Dine_type_choices" id = "Dine_Type">
+            {% for dine_type in dine_type_selection %}
+            <option value = "dine_type['tid']">{{ dine_type['dinning_type'] }}</option>
+        </select>
+    </div>
+
+    <div class = "form-group">
+        <label for = "Dine-Option">How you wanna eat:</label>
+        <select name = "Dine_option_chocies" id = "Dine_Option">
+            {% for dine_option in dine_option_selection %}
+            <option value = "dine_option['dine_option']">{{ dine_option['dine_option'] }}</option>
+        </select>
+    </div>
+    
+    <div class = "form-group">
+        <button type = "submit" class = "btn btn-primary"> Get Restaurant </button>
+    </div>
+</form>
+
+{% endblock %}
