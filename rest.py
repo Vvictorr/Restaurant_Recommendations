@@ -9,7 +9,6 @@ To run locally:
 
 import os
 from sqlalchemy import *
-from sqlalchemy.pool import NullPool
 from flask import Flask, request, render_template, g, redirect, Response, url_for
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
@@ -57,15 +56,15 @@ def index():
         dine_options = request.form.get('Dine_Option')
         return redirect(url_for('webshow', areas = areas, cuisines = cuisines, dine_types = dine_types, dine_options = dine_options))
     
-    area_selection = engine.execute('SELECT * FROM Area').fetchall()
-    cuisine_selection = engine.execute('SELECT * FROM').fetchall()
-    dine_type_selection = engine.execute('SELECT * FROM').fetchall()
-    dine_option_selection = engine.execute('SELECT * FROM').fetchall()
+    area_selection = g.conn.execute('SELECT * FROM Area').fetchall()
+    cuisine_selection = g.conn.execute('SELECT * FROM').fetchall()
+    dine_type_selection = g.conn.execute('SELECT * FROM').fetchall()
+    dine_option_selection = g.conn.execute('SELECT * FROM').fetchall()
     return render_template('index.html', area_selection, cuisine_selection, dine_option_selection, dine_type_selection)
 
 @app.route('/show_result/?')
 def webshow(areas, cuisines, dine_types, dine_options):
-    restaurants = engine.execute('select distinct r.restaurant_name, r.rid, a.street_name, g1.grades_name'
+    restaurants = g.conn.execute('select distinct r.restaurant_name, r.rid, a.street_name, g1.grades_name'
                                 'from Restaurant r join Rest_Type c on r.rid = c.rid'
                                 'join Located_in l on r.rid = l.rid'
                                 'join Address a on l.sid = a.sid'
