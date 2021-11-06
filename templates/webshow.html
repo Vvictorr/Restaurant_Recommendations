@@ -1,0 +1,21 @@
+{% expands 'base.html' %}
+
+{% block content %}
+
+<table>
+    <tr title = "table rows for headings">
+        <th>Restaurant Name</th>
+        <th>Location</th>
+        <th>Grade</th>
+    </tr>
+    <hr>
+    {{ for infor in restaurants }}
+    <tr>
+        <td>info.restaurant_name</td>
+        <td>info.street_name</td>
+        <td>info.grades_name</td>
+    </tr>
+    <hr>
+</table>
+
+{% endblock %}

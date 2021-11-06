@@ -65,13 +65,16 @@ def index():
 
 @app.route('/show_result/?')
 def webshow(areas, cuisines, dine_types, dine_options):
-    restaurants = engine.execute('select r.restaurant_name, r.rid, a.street_name'
+    restaurants = engine.execute('select distinct r.restaurant_name, r.rid, a.street_name, g1.grades_name'
                                 'from Restaurant r join Rest_Type c on r.rid = c.rid'
                                 'join Located_in l on r.rid = l.rid'
                                 'join Address a on l.sid = a.sid'
                                 'join Restaurant_Dining_Type dt on r.rid = dt.rid'
                                 'join Restaurant_Dining_Option do on r.rid = do.rid'
-                                'where c.cid = ? and a.aid = ? and dt.tid = ? and do.option_id = ?',
+                                'join graded g on r.rid = g.gid'
+                                'join Grades g1 on g,gid = g1.gid'
+                                'where c.cid = ? and a.aid = ? and dt.tid = ? and do.option_id = ?'
+                                'order by g.gid asc',
                                 (cuisines, areas, dine_types, dine_options))
     return render_template('webshow.html', restaurants)
 
